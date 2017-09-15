@@ -385,7 +385,7 @@ namespace AD2UART
             cbADValue.Checked = true;
             cbVoltageValue.Checked = true;
             txtBasicVoltage.Text = "5.0";
-            txtADGain.Text = "1";
+            txtADGain.Text = "1.0";
             cbADDataBit.SelectedIndex = 2;
         }
     }

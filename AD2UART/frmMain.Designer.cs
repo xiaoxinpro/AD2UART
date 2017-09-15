@@ -103,7 +103,7 @@
             this.menuOpenSerial.Name = "menuOpenSerial";
             this.menuOpenSerial.ShortcutKeyDisplayString = "";
             this.menuOpenSerial.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.menuOpenSerial.Size = new System.Drawing.Size(122, 38);
+            this.menuOpenSerial.Size = new System.Drawing.Size(122, 35);
             this.menuOpenSerial.Text = "打开串口";
             this.menuOpenSerial.Click += new System.EventHandler(this.打开端口ToolStripMenuItem_Click);
             // 
@@ -119,7 +119,7 @@
             // 
             this.menuFunction.Name = "menuFunction";
             this.menuFunction.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.menuFunction.Size = new System.Drawing.Size(122, 38);
+            this.menuFunction.Size = new System.Drawing.Size(122, 35);
             this.menuFunction.Text = "功能设置";
             this.menuFunction.Visible = false;
             this.menuFunction.Click += new System.EventHandler(this.menuFunction_Click);
@@ -141,14 +141,14 @@
             this.menuSaveCmd});
             this.menuCmd.Name = "menuCmd";
             this.menuCmd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.B)));
-            this.menuCmd.Size = new System.Drawing.Size(122, 38);
+            this.menuCmd.Size = new System.Drawing.Size(122, 35);
             this.menuCmd.Text = "报文选项";
             // 
             // menuClearCmd
             // 
             this.menuClearCmd.Name = "menuClearCmd";
             this.menuClearCmd.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.menuClearCmd.Size = new System.Drawing.Size(268, 38);
+            this.menuClearCmd.Size = new System.Drawing.Size(256, 38);
             this.menuClearCmd.Text = "清空报文";
             this.menuClearCmd.Click += new System.EventHandler(this.menuClearCmd_Click);
             // 
@@ -156,14 +156,14 @@
             // 
             this.menuFontCmd.Name = "menuFontCmd";
             this.menuFontCmd.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.menuFontCmd.Size = new System.Drawing.Size(268, 38);
+            this.menuFontCmd.Size = new System.Drawing.Size(256, 38);
             this.menuFontCmd.Text = "报文样式";
             this.menuFontCmd.Click += new System.EventHandler(this.menuFontCmd_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(265, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(253, 6);
             // 
             // menuShowLogCmd
             // 
@@ -172,7 +172,7 @@
             this.menuShowLogCmd.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuShowLogCmd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuShowLogCmd.Name = "menuShowLogCmd";
-            this.menuShowLogCmd.Size = new System.Drawing.Size(268, 38);
+            this.menuShowLogCmd.Size = new System.Drawing.Size(256, 38);
             this.menuShowLogCmd.Text = "显示提示信息";
             // 
             // menuShowSendData
@@ -182,7 +182,7 @@
             this.menuShowSendData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuShowSendData.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuShowSendData.Name = "menuShowSendData";
-            this.menuShowSendData.Size = new System.Drawing.Size(268, 38);
+            this.menuShowSendData.Size = new System.Drawing.Size(256, 38);
             this.menuShowSendData.Text = "显示发送数据";
             // 
             // menuShowRcvData
@@ -192,13 +192,13 @@
             this.menuShowRcvData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuShowRcvData.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuShowRcvData.Name = "menuShowRcvData";
-            this.menuShowRcvData.Size = new System.Drawing.Size(268, 38);
+            this.menuShowRcvData.Size = new System.Drawing.Size(256, 38);
             this.menuShowRcvData.Text = "显示接收数据";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(265, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(253, 6);
             // 
             // menuShowCmdTime
             // 
@@ -207,7 +207,7 @@
             this.menuShowCmdTime.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuShowCmdTime.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuShowCmdTime.Name = "menuShowCmdTime";
-            this.menuShowCmdTime.Size = new System.Drawing.Size(268, 38);
+            this.menuShowCmdTime.Size = new System.Drawing.Size(256, 38);
             this.menuShowCmdTime.Text = "显示报文时间";
             // 
             // menuShowCmdHead
@@ -217,19 +217,19 @@
             this.menuShowCmdHead.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuShowCmdHead.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.menuShowCmdHead.Name = "menuShowCmdHead";
-            this.menuShowCmdHead.Size = new System.Drawing.Size(268, 38);
+            this.menuShowCmdHead.Size = new System.Drawing.Size(256, 38);
             this.menuShowCmdHead.Text = "显示报文头";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(265, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(253, 6);
             // 
             // menuOutputCmd
             // 
             this.menuOutputCmd.Name = "menuOutputCmd";
             this.menuOutputCmd.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.menuOutputCmd.Size = new System.Drawing.Size(268, 38);
+            this.menuOutputCmd.Size = new System.Drawing.Size(256, 38);
             this.menuOutputCmd.Text = "动态输出";
             this.menuOutputCmd.Click += new System.EventHandler(this.menuOutputCmd_Click);
             // 
@@ -237,7 +237,7 @@
             // 
             this.menuSaveCmd.Name = "menuSaveCmd";
             this.menuSaveCmd.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.menuSaveCmd.Size = new System.Drawing.Size(268, 38);
+            this.menuSaveCmd.Size = new System.Drawing.Size(256, 38);
             this.menuSaveCmd.Text = "保存报文";
             this.menuSaveCmd.Click += new System.EventHandler(this.menuSaveCmd_Click);
             // 
@@ -245,7 +245,7 @@
             // 
             this.menuAbout.Name = "menuAbout";
             this.menuAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuAbout.Size = new System.Drawing.Size(74, 38);
+            this.menuAbout.Size = new System.Drawing.Size(74, 35);
             this.menuAbout.Text = "关于";
             this.menuAbout.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
@@ -339,7 +339,7 @@
             this.MinimumSize = new System.Drawing.Size(1080, 480);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "美容仪模拟器";
+            this.Text = "AD采样工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
