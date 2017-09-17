@@ -142,8 +142,8 @@ namespace AD2UART
                     {
                         Byte[] receivedData = new Byte[sp1.BytesToRead];        //创建接收字节数组
                         sp1.Read(receivedData, 0, receivedData.Length);         //读取数据
-                        RcvDataProcess(receivedData);                           //接收数据处理
                         sp1.DiscardInBuffer();                                  //清空SerialPort控件的Buffer
+                        RcvDataProcess(receivedData);                           //接收数据处理
                         if(receivedData.Length <= 0)
                         {
                             return;
@@ -507,11 +507,17 @@ namespace AD2UART
                         if (Profile.G_AD_OUTVOL == "TRUE")
                         {
                             Double adValue = Convert.ToUInt32(dataH) * 256 + Convert.ToUInt32(byteBuff[i]);
-                            Double vol = Convert.ToDouble(Profile.arrADGain[dataCnt/2%4]) * Convert.ToDouble(Profile.arrADVoltage[dataCnt/2%4]) * adValue / adMax;
+                            if(adValue > adMax)
+                            {
+                                strData.Append("\r\n");
+                                dataCnt = 8;
+                                continue;
+                            }
+                            //Double vol = Convert.ToDouble(Profile.arrADGain[(dataCnt - 1) / 2 % 4]) * Convert.ToDouble(Profile.arrADVoltage[(dataCnt - 1) / 2 % 4]) * adValue / adMax;
+                            string vol = "=" + (Profile.arrADGain[(dataCnt - 1) / 2 % 4]) + "*" + (Profile.arrADVoltage[(dataCnt - 1) / 2 % 4]) + "*" + adValue + "/" + adMax;
                             strData.Append(vol + "\t");
                         }
                     }
-
                 }
                 funcOutFile(strData.ToString());
                 //Console.Write(strData.ToString());
@@ -649,6 +655,7 @@ namespace AD2UART
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
+            funcCloseSerialPort();
             System.Diagnostics.Process.Start(Profile.G_AD_PATH);
         }
     }
