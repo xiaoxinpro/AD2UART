@@ -44,22 +44,31 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbVoltageValue = new System.Windows.Forms.CheckBox();
             this.cbADValue = new System.Windows.Forms.CheckBox();
-            this.btnAD = new System.Windows.Forms.Button();
             this.btnSelectPath = new System.Windows.Forms.Button();
+            this.txtOutPath = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnAD = new System.Windows.Forms.Button();
             this.txtADGain = new System.Windows.Forms.TextBox();
             this.txtBasicVoltage = new System.Windows.Forms.TextBox();
             this.cbADDataBit = new System.Windows.Forms.ComboBox();
-            this.txtOutPath = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.btnEnd = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.timSerial = new System.Windows.Forms.Timer(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tcAD = new System.Windows.Forms.TabControl();
+            this.tabAD1 = new System.Windows.Forms.TabPage();
+            this.tabAD2 = new System.Windows.Forms.TabPage();
+            this.tabAD3 = new System.Windows.Forms.TabPage();
+            this.tabAD4 = new System.Windows.Forms.TabPage();
+            this.pBottom = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tcAD.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -221,25 +230,18 @@
             // 
             this.groupBox2.Controls.Add(this.cbVoltageValue);
             this.groupBox2.Controls.Add(this.cbADValue);
-            this.groupBox2.Controls.Add(this.btnAD);
             this.groupBox2.Controls.Add(this.btnSelectPath);
-            this.groupBox2.Controls.Add(this.txtADGain);
-            this.groupBox2.Controls.Add(this.txtBasicVoltage);
-            this.groupBox2.Controls.Add(this.cbADDataBit);
             this.groupBox2.Controls.Add(this.txtOutPath);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.groupBox2.Location = new System.Drawing.Point(13, 288);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(576, 355);
+            this.groupBox2.Size = new System.Drawing.Size(576, 199);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "数据配置";
+            this.groupBox2.Text = "输出配置";
             // 
             // cbVoltageValue
             // 
@@ -267,17 +269,6 @@
             this.cbADValue.Text = "AD值";
             this.cbADValue.UseVisualStyleBackColor = true;
             // 
-            // btnAD
-            // 
-            this.btnAD.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnAD.Location = new System.Drawing.Point(305, 264);
-            this.btnAD.Name = "btnAD";
-            this.btnAD.Size = new System.Drawing.Size(252, 52);
-            this.btnAD.TabIndex = 10;
-            this.btnAD.Text = "默认配置";
-            this.btnAD.UseVisualStyleBackColor = true;
-            this.btnAD.Click += new System.EventHandler(this.btnAD_Click);
-            // 
             // btnSelectPath
             // 
             this.btnSelectPath.Font = new System.Drawing.Font("微软雅黑", 9F);
@@ -289,37 +280,6 @@
             this.btnSelectPath.UseVisualStyleBackColor = true;
             this.btnSelectPath.Click += new System.EventHandler(this.btnSelectPath_Click);
             // 
-            // txtADGain
-            // 
-            this.txtADGain.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.txtADGain.Location = new System.Drawing.Point(170, 271);
-            this.txtADGain.Name = "txtADGain";
-            this.txtADGain.Size = new System.Drawing.Size(88, 39);
-            this.txtADGain.TabIndex = 3;
-            // 
-            // txtBasicVoltage
-            // 
-            this.txtBasicVoltage.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.txtBasicVoltage.Location = new System.Drawing.Point(170, 205);
-            this.txtBasicVoltage.Name = "txtBasicVoltage";
-            this.txtBasicVoltage.Size = new System.Drawing.Size(88, 39);
-            this.txtBasicVoltage.TabIndex = 3;
-            // 
-            // cbADDataBit
-            // 
-            this.cbADDataBit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbADDataBit.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbADDataBit.FormattingEnabled = true;
-            this.cbADDataBit.Items.AddRange(new object[] {
-            "8",
-            "10",
-            "12",
-            "16"});
-            this.cbADDataBit.Location = new System.Drawing.Point(424, 205);
-            this.cbADDataBit.Name = "cbADDataBit";
-            this.cbADDataBit.Size = new System.Drawing.Size(121, 39);
-            this.cbADDataBit.TabIndex = 7;
-            // 
             // txtOutPath
             // 
             this.txtOutPath.Font = new System.Drawing.Font("微软雅黑", 9F);
@@ -327,36 +287,6 @@
             this.txtOutPath.Name = "txtOutPath";
             this.txtOutPath.Size = new System.Drawing.Size(288, 39);
             this.txtOutPath.TabIndex = 3;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 271);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(167, 39);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "比例系数：";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(298, 203);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(137, 39);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "数据位：";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 203);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(167, 39);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "基准电压：";
             // 
             // label7
             // 
@@ -378,10 +308,87 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "输出路径：";
             // 
+            // btnAD
+            // 
+            this.btnAD.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnAD.Location = new System.Drawing.Point(305, 199);
+            this.btnAD.Name = "btnAD";
+            this.btnAD.Size = new System.Drawing.Size(252, 52);
+            this.btnAD.TabIndex = 10;
+            this.btnAD.Text = "默认配置";
+            this.btnAD.UseVisualStyleBackColor = true;
+            this.btnAD.Click += new System.EventHandler(this.btnAD_Click);
+            // 
+            // txtADGain
+            // 
+            this.txtADGain.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.txtADGain.Location = new System.Drawing.Point(170, 206);
+            this.txtADGain.Name = "txtADGain";
+            this.txtADGain.Size = new System.Drawing.Size(88, 39);
+            this.txtADGain.TabIndex = 3;
+            this.txtADGain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtADGain_KeyPress);
+            this.txtADGain.Validated += new System.EventHandler(this.txtADGain_Validated);
+            // 
+            // txtBasicVoltage
+            // 
+            this.txtBasicVoltage.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.txtBasicVoltage.Location = new System.Drawing.Point(170, 140);
+            this.txtBasicVoltage.Name = "txtBasicVoltage";
+            this.txtBasicVoltage.Size = new System.Drawing.Size(88, 39);
+            this.txtBasicVoltage.TabIndex = 3;
+            this.txtBasicVoltage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBasicVoltage_KeyPress);
+            this.txtBasicVoltage.Validated += new System.EventHandler(this.txtBasicVoltage_Validated);
+            // 
+            // cbADDataBit
+            // 
+            this.cbADDataBit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbADDataBit.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbADDataBit.FormattingEnabled = true;
+            this.cbADDataBit.Items.AddRange(new object[] {
+            "8",
+            "10",
+            "12",
+            "16"});
+            this.cbADDataBit.Location = new System.Drawing.Point(424, 140);
+            this.cbADDataBit.Name = "cbADDataBit";
+            this.cbADDataBit.Size = new System.Drawing.Size(121, 39);
+            this.cbADDataBit.TabIndex = 7;
+            this.cbADDataBit.SelectionChangeCommitted += new System.EventHandler(this.cbADDataBit_SelectionChangeCommitted);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 206);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(167, 39);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "比例系数：";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(298, 138);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(137, 39);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "数据位：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 138);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(167, 39);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "基准电压：";
+            // 
             // btnEnd
             // 
             this.btnEnd.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnEnd.Location = new System.Drawing.Point(437, 668);
+            this.btnEnd.Location = new System.Drawing.Point(437, 792);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(152, 69);
             this.btnEnd.TabIndex = 2;
@@ -393,7 +400,7 @@
             // 
             this.btnOK.Enabled = false;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnOK.Location = new System.Drawing.Point(260, 668);
+            this.btnOK.Location = new System.Drawing.Point(260, 792);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(152, 69);
             this.btnOK.TabIndex = 2;
@@ -407,11 +414,90 @@
             this.timSerial.Interval = 500;
             this.timSerial.Tick += new System.EventHandler(this.timSerial_Tick);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tcAD);
+            this.groupBox3.Controls.Add(this.txtADGain);
+            this.groupBox3.Controls.Add(this.cbADDataBit);
+            this.groupBox3.Controls.Add(this.txtBasicVoltage);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.btnAD);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.groupBox3.Location = new System.Drawing.Point(13, 500);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(576, 276);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "数据配置";
+            // 
+            // tcAD
+            // 
+            this.tcAD.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tcAD.Controls.Add(this.tabAD1);
+            this.tcAD.Controls.Add(this.tabAD2);
+            this.tcAD.Controls.Add(this.tabAD3);
+            this.tcAD.Controls.Add(this.tabAD4);
+            this.tcAD.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.tcAD.Location = new System.Drawing.Point(19, 62);
+            this.tcAD.Name = "tcAD";
+            this.tcAD.SelectedIndex = 0;
+            this.tcAD.Size = new System.Drawing.Size(538, 53);
+            this.tcAD.TabIndex = 0;
+            this.tcAD.SelectedIndexChanged += new System.EventHandler(this.tcAD_SelectedIndexChanged);
+            // 
+            // tabAD1
+            // 
+            this.tabAD1.Location = new System.Drawing.Point(4, 47);
+            this.tabAD1.Name = "tabAD1";
+            this.tabAD1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAD1.Size = new System.Drawing.Size(530, 2);
+            this.tabAD1.TabIndex = 0;
+            this.tabAD1.Text = "AD1";
+            this.tabAD1.UseVisualStyleBackColor = true;
+            // 
+            // tabAD2
+            // 
+            this.tabAD2.Location = new System.Drawing.Point(4, 47);
+            this.tabAD2.Name = "tabAD2";
+            this.tabAD2.Size = new System.Drawing.Size(530, 2);
+            this.tabAD2.TabIndex = 1;
+            this.tabAD2.Text = "AD2";
+            this.tabAD2.UseVisualStyleBackColor = true;
+            // 
+            // tabAD3
+            // 
+            this.tabAD3.Location = new System.Drawing.Point(4, 47);
+            this.tabAD3.Name = "tabAD3";
+            this.tabAD3.Size = new System.Drawing.Size(530, 2);
+            this.tabAD3.TabIndex = 2;
+            this.tabAD3.Text = "AD3";
+            this.tabAD3.UseVisualStyleBackColor = true;
+            // 
+            // tabAD4
+            // 
+            this.tabAD4.Location = new System.Drawing.Point(4, 47);
+            this.tabAD4.Name = "tabAD4";
+            this.tabAD4.Size = new System.Drawing.Size(530, 2);
+            this.tabAD4.TabIndex = 3;
+            this.tabAD4.Text = "AD4";
+            this.tabAD4.UseVisualStyleBackColor = true;
+            // 
+            // pBottom
+            // 
+            this.pBottom.Location = new System.Drawing.Point(17, 885);
+            this.pBottom.Name = "pBottom";
+            this.pBottom.Size = new System.Drawing.Size(572, 50);
+            this.pBottom.TabIndex = 4;
+            // 
             // frmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(605, 753);
+            this.ClientSize = new System.Drawing.Size(605, 879);
+            this.Controls.Add(this.pBottom);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.groupBox2);
@@ -430,6 +516,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.tcAD.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -465,5 +554,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TabControl tcAD;
+        private System.Windows.Forms.TabPage tabAD1;
+        private System.Windows.Forms.TabPage tabAD2;
+        private System.Windows.Forms.TabPage tabAD3;
+        private System.Windows.Forms.TabPage tabAD4;
+        private System.Windows.Forms.Panel pBottom;
     }
 }

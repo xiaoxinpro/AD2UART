@@ -27,6 +27,9 @@ namespace AD2UART
             FormMain = new frmMain();
             INIFILE.Profile.LoadProfile();//加载所有
 
+            //设置窗体底部高度
+            this.Height = pBottom.Top + pBottom.Height; ;
+
             // 预置波特率
             switch (Profile.G_BAUDRATE)
             {
@@ -159,24 +162,24 @@ namespace AD2UART
             }
 
             //预置基准电压
-            txtBasicVoltage.Text = Profile.G_AD_VOLTAGE;
+            txtBasicVoltage.Text = Convert.ToString(Profile.arrADVoltage[tcAD.SelectedIndex]);
 
             //预置比例系数
-            txtADGain.Text = Profile.G_AD_GAIN;
+            txtADGain.Text = Convert.ToString(Profile.arrADGain[tcAD.SelectedIndex]);
 
             //预置AD数据位
-            switch (Profile.G_AD_DATABIT)
+            switch (Profile.arrADDataBit[tcAD.SelectedIndex])
             {
-                case "8":
+                case 8:
                     cbADDataBit.SelectedIndex = 0;
                     break;
-                case "10":
+                case 10:
                     cbADDataBit.SelectedIndex = 1;
                     break;
-                case "12":
+                case 12:
                     cbADDataBit.SelectedIndex = 2;
                     break;
-                case "16":
+                case 16:
                     cbADDataBit.SelectedIndex = 3;
                     break;
                 default:
@@ -336,11 +339,7 @@ namespace AD2UART
 
             Profile.G_AD_OUTVOL = cbVoltageValue.Checked ? "TRUE" : "FALSE";
 
-            Profile.G_AD_VOLTAGE = Convert.ToString(Convert.ToDouble(txtBasicVoltage.Text));
-
-            Profile.G_AD_GAIN = Convert.ToString(Convert.ToDouble(txtADGain.Text));
-
-            Profile.G_AD_DATABIT = cbADDataBit.Text;
+            //AD参数同步已更改
 
             Profile.SaveProfile();
         }
@@ -351,6 +350,8 @@ namespace AD2UART
             cbParity.SelectedIndex = 0;
             cbDataBits.SelectedIndex = 3;
             cbStop.SelectedIndex = 0;
+            cbADValue.Checked = true;
+            cbVoltageValue.Checked = true;
         }
 
         private void btnSelectPath_Click(object sender, EventArgs e)
@@ -382,11 +383,65 @@ namespace AD2UART
 
         private void btnAD_Click(object sender, EventArgs e)
         {
-            cbADValue.Checked = true;
-            cbVoltageValue.Checked = true;
-            txtBasicVoltage.Text = "5.0";
-            txtADGain.Text = "1.0";
+            txtBasicVoltage.Text = "5";
+            txtADGain.Text = "1";
             cbADDataBit.SelectedIndex = 2;
+            txtBasicVoltage_Validated(null, null);
+            txtADGain_Validated(null, null);
+            cbADDataBit_SelectionChangeCommitted(null, null);
+        }
+
+        private void tcAD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtBasicVoltage.Text = Convert.ToString(Profile.arrADVoltage[tcAD.SelectedIndex]);
+            txtADGain.Text= Convert.ToString(Profile.arrADGain[tcAD.SelectedIndex]);
+            cbADDataBit.Text = Convert.ToString(Profile.arrADDataBit[tcAD.SelectedIndex]);
+        }
+
+        private void txtBasicVoltage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键  
+            {
+                Console.WriteLine(txtBasicVoltage.Text.IndexOf('.'));
+                if (e.KeyChar == '.' && txtBasicVoltage.Text.IndexOf('.') == -1)
+                {
+                    return;
+                }
+                else if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字  
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void txtBasicVoltage_Validated(object sender, EventArgs e)
+        {
+            Profile.arrADVoltage[tcAD.SelectedIndex] = Convert.ToDouble(txtBasicVoltage.Text);
+        }
+
+        private void txtADGain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键  
+            {
+                if (e.KeyChar == '.' && txtADGain.Text.IndexOf('.') == -1)
+                {
+                    return;
+                }
+                else if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字  
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void txtADGain_Validated(object sender, EventArgs e)
+        {
+            Profile.arrADGain[tcAD.SelectedIndex] = Convert.ToDouble(txtADGain.Text);
+        }
+
+        private void cbADDataBit_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Profile.arrADDataBit[tcAD.SelectedIndex] = Convert.ToDouble(cbADDataBit.Text);
         }
     }
 }

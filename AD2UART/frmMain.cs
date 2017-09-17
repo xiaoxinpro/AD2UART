@@ -459,10 +459,9 @@ namespace AD2UART
             StringBuilder strData = new StringBuilder();
             if(byteBuff.Length > 0)
             {
-                Double adMax = Math.Pow(2, (Convert.ToInt32(Profile.G_AD_DATABIT)));
-                //Console.WriteLine("2 ^ " + Profile.G_AD_DATABIT+" = " + adMax);
                 for (int i = 0; i < byteBuff.Length; i++) 
                 {
+                    Double adMax = Math.Pow(2, (Convert.ToInt32(Profile.arrADDataBit[dataCnt / 2 % 4])));
                     if (++dataCnt >= 10)
                     {
                         if(is0x13 == true && byteBuff[i] == 0x10)
@@ -508,7 +507,7 @@ namespace AD2UART
                         if (Profile.G_AD_OUTVOL == "TRUE")
                         {
                             Double adValue = Convert.ToUInt32(dataH) * 256 + Convert.ToUInt32(byteBuff[i]);
-                            Double vol = Convert.ToDouble(Profile.G_AD_GAIN) * Convert.ToDouble(Profile.G_AD_VOLTAGE) * adValue / adMax;
+                            Double vol = Convert.ToDouble(Profile.arrADGain[dataCnt/2%4]) * Convert.ToDouble(Profile.arrADVoltage[dataCnt/2%4]) * adValue / adMax;
                             strData.Append(vol + "\t");
                         }
                     }
@@ -648,5 +647,9 @@ namespace AD2UART
             }
         }
 
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Profile.G_AD_PATH);
+        }
     }
 }

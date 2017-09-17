@@ -57,6 +57,7 @@
             this.timUart = new System.Windows.Forms.Timer(this.components);
             this.rtCmd = new System.Windows.Forms.RichTextBox();
             this.timTime = new System.Windows.Forms.Timer(this.components);
+            this.btnOpenFile = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.statusMain.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnOpenFile);
             this.panel1.Controls.Add(this.btnEnd);
             this.panel1.Location = new System.Drawing.Point(12, 59);
             this.panel1.Name = "panel1";
@@ -313,7 +315,7 @@
             this.rtCmd.Location = new System.Drawing.Point(12, 131);
             this.rtCmd.Name = "rtCmd";
             this.rtCmd.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtCmd.Size = new System.Drawing.Size(756, 593);
+            this.rtCmd.Size = new System.Drawing.Size(1030, 593);
             this.rtCmd.TabIndex = 4;
             this.rtCmd.Text = "";
             this.rtCmd.TextChanged += new System.EventHandler(this.rtCmd_TextChanged);
@@ -323,6 +325,17 @@
             this.timTime.Enabled = true;
             this.timTime.Interval = 1000;
             this.timTime.Tick += new System.EventHandler(this.timTime_Tick);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenFile.Location = new System.Drawing.Point(3, 5);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(214, 58);
+            this.btnOpenFile.TabIndex = 0;
+            this.btnOpenFile.Text = "打开输出文件";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // frmMain
             // 
@@ -382,6 +395,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem menuOutputCmd;
         private System.Windows.Forms.ToolStripMenuItem menuFontCmd;
+        private System.Windows.Forms.Button btnOpenFile;
     }
 }
 
