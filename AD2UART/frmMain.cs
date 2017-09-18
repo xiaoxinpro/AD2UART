@@ -10,20 +10,32 @@ using System.IO.Ports;
 using INIFILE;
 using DocDetector.Core.Extensions;
 using System.IO;
+using System.Collections;
+using System.Threading;
 
 namespace AD2UART
 {
     public partial class frmMain : Form
     {
         public SerialPort sp1 = new SerialPort();
+        public Queue DQueue = Queue.Synchronized(new Queue());
+        public Thread thRecDataProcess;
 
         public frmMain()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //初始化接收处理线程
+            thRecDataProcess = new Thread(new ThreadStart(ThreadRecDataProcess));
+            thRecDataProcess.IsBackground = true; //后台运行，主窗体关闭后，可退出程序
+            thRecDataProcess.Start();
+
+            //设置富文本高度
+            rtCmd.Height = statusMain.Top - rtCmd.Top - 10;
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -89,6 +101,7 @@ namespace AD2UART
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             funcSaveConfig();
+            thRecDataProcess.Abort();
             if (this.DialogResult != DialogResult.OK)
             {
                 System.Environment.Exit(0);
@@ -98,6 +111,7 @@ namespace AD2UART
         private void btnEnd_Click(object sender, EventArgs e)
         {
             funcSaveConfig();
+            thRecDataProcess.Abort();
             System.Environment.Exit(0);
         }
 
@@ -119,51 +133,66 @@ namespace AD2UART
         {
             if (sp1.IsOpen)
             {
-                //输出当前时间
-                string strTextBuff = "";
-
-                byte[] byteRead = new byte[sp1.BytesToRead];    //BytesToRead:sp1接收的字符个数
-                if (Profile.G_DATA_RCVSTR == "TRUE")            //接收字符串格式
+                try
                 {
-                    try
+                    byte[] readBuffer = new byte[sp1.BytesToRead];
+                    int count = sp1.Read(readBuffer, 0, readBuffer.Length);
+
+                    for (int i = 0; i < count; i++)
                     {
-                        strTextBuff += sp1.ReadLine();
-                        sp1.DiscardInBuffer();                  //清空SerialPort控件的Buffer 
-                    }
-                    catch (System.Exception ex)
-                    {
-                        funcOutputLog("【接收出错】" + ex.Message, "错误");
-                        return;
+                        DQueue.Enqueue(readBuffer[i]);
                     }
                 }
-                else                                            //接收16进制格式
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        Byte[] receivedData = new Byte[sp1.BytesToRead];        //创建接收字节数组
-                        sp1.Read(receivedData, 0, receivedData.Length);         //读取数据
-                        sp1.DiscardInBuffer();                                  //清空SerialPort控件的Buffer
-                        RcvDataProcess(receivedData);                           //接收数据处理
-                        if(receivedData.Length <= 0)
-                        {
-                            return;
-                        }
-                        string strRcv = null;
-                        for (int i = 0; i < receivedData.Length; i++)
-                        {
-                            strRcv += (i > 0) ? " " : "";
-                            strRcv += receivedData[i].ToString("X2");           //16进制显示
-                        }
-                        strTextBuff += strRcv;
-
-                    }
-                    catch (System.Exception ex)
-                    {
-                        funcOutputLog("【接收出错】" + ex.Message, "错误");
-                        return;
-                    }
+                    funcOutputLog("【接收出错】" + ex.Message, "错误");
+                    throw ex;
                 }
-                funcOutputLog(strTextBuff, " ");
+                ////输出当前时间
+                //string strTextBuff = "";
+
+                //byte[] byteRead = new byte[sp1.BytesToRead];    //BytesToRead:sp1接收的字符个数
+                //if (Profile.G_DATA_RCVSTR == "TRUE")            //接收字符串格式
+                //{
+                //    try
+                //    {
+                //        strTextBuff += sp1.ReadLine();
+                //        sp1.DiscardInBuffer();                  //清空SerialPort控件的Buffer 
+                //    }
+                //    catch (System.Exception ex)
+                //    {
+                //        funcOutputLog("【接收出错】" + ex.Message, "错误");
+                //        return;
+                //    }
+                //}
+                //else                                            //接收16进制格式
+                //{
+                //    try
+                //    {
+                //        Byte[] receivedData = new Byte[sp1.BytesToRead];        //创建接收字节数组
+                //        sp1.Read(receivedData, 0, receivedData.Length);         //读取数据
+                //        sp1.DiscardInBuffer();                                  //清空SerialPort控件的Buffer
+                //        RcvDataProcess(receivedData);                           //接收数据处理
+                //        if(receivedData.Length <= 0)
+                //        {
+                //            return;
+                //        }
+                //        string strRcv = null;
+                //        for (int i = 0; i < receivedData.Length; i++)
+                //        {
+                //            strRcv += (i > 0) ? " " : "";
+                //            strRcv += receivedData[i].ToString("X2");           //16进制显示
+                //        }
+                //        strTextBuff += strRcv;
+
+                //    }
+                //    catch (System.Exception ex)
+                //    {
+                //        funcOutputLog("【接收出错】" + ex.Message, "错误");
+                //        return;
+                //    }
+                //}
+                //funcOutputLog(strTextBuff, " ");
             }
             else
             {
@@ -451,6 +480,45 @@ namespace AD2UART
 
         }
 
+        private void ThreadRecDataProcess()
+        {
+            while (true)
+            {
+                byte[] buff = new byte[DQueue.Count];
+                try
+                {
+                    if(buff.Length > 0)
+                    {
+                        for (int i = 0; i < buff.Length; i++)
+                        {
+                            buff[i] = (byte)DQueue.Dequeue();
+                        }
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(1);
+                        continue;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+                //输出显示
+                string strRcv = null;
+                for (int i = 0; i < buff.Length; i++)
+                {
+                    strRcv += (i > 0) ? " " : "";
+                    strRcv += buff[i].ToString("X2");           //16进制显示
+                }
+                funcOutputLog(strRcv, " ");
+
+                //接收数据处理
+                RcvDataProcess(buff);
+            }
+        }
+
         private byte dataH = 0x00;
         private bool is0x13 = false;
         private int dataCnt = 8;
@@ -547,10 +615,10 @@ namespace AD2UART
         private static int intCharNum = 0;
         private void timUart_Tick(object sender, EventArgs e)
         {
-            /*
-            byte[] byteSendData = { 0x22, 0x06, 0xA5, 0x00, 0x00, 0x00, 0x01, 0x00 };
+           
+            byte[] byteSendData = { 0x01, 0x11, 0x02, 0x22, 0x03, 0x33, 0x04, 0x44, 0x13, 0x10 };
             //设置命令帧类型
-            if (isSendDataChange)
+             /*if (isSendDataChange)
             {
                 isSendDataChange = false;
                 byteSendData[3] = 0x01;
@@ -569,11 +637,11 @@ namespace AD2UART
 
             //计算校验和
             byteSendData[byteSendData.Length - 1] = Uart.byteCheakSum(byteSendData, 2, 5);
-
+*/
             //发送数据
             sp1_DataSend(Uart.byteToHexStr(byteSendData));
 
-            */
+            
 
             if (++intCharNum > 3)
             {
@@ -657,6 +725,20 @@ namespace AD2UART
         {
             funcCloseSerialPort();
             System.Diagnostics.Process.Start(Profile.G_AD_PATH);
+        }
+
+        private void btnDbg_Click(object sender, EventArgs e)
+        {
+            if(btnDbg.Text == "开启调试")
+            {
+                btnDbg.Text = "关闭调试";
+                timUart.Enabled = true;
+            }
+            else
+            {
+                btnDbg.Text = "开启调试";
+                timUart.Enabled = false;
+            }
         }
     }
 }

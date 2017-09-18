@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDbg = new System.Windows.Forms.Button();
+            this.btnOpenFile = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.menuOpenSerial = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +59,6 @@
             this.timUart = new System.Windows.Forms.Timer(this.components);
             this.rtCmd = new System.Windows.Forms.RichTextBox();
             this.timTime = new System.Windows.Forms.Timer(this.components);
-            this.btnOpenFile = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.statusMain.SuspendLayout();
@@ -67,12 +68,35 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnDbg);
             this.panel1.Controls.Add(this.btnOpenFile);
             this.panel1.Controls.Add(this.btnEnd);
             this.panel1.Location = new System.Drawing.Point(12, 59);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1030, 66);
             this.panel1.TabIndex = 1;
+            // 
+            // btnDbg
+            // 
+            this.btnDbg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDbg.Location = new System.Drawing.Point(715, 3);
+            this.btnDbg.Name = "btnDbg";
+            this.btnDbg.Size = new System.Drawing.Size(159, 58);
+            this.btnDbg.TabIndex = 1;
+            this.btnDbg.Text = "开启调试";
+            this.btnDbg.UseVisualStyleBackColor = true;
+            this.btnDbg.Visible = false;
+            this.btnDbg.Click += new System.EventHandler(this.btnDbg_Click);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(3, 5);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(214, 58);
+            this.btnOpenFile.TabIndex = 0;
+            this.btnOpenFile.Text = "打开输出文件";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // btnEnd
             // 
@@ -303,7 +327,7 @@
             // 
             // timUart
             // 
-            this.timUart.Interval = 300;
+            this.timUart.Interval = 1;
             this.timUart.Tick += new System.EventHandler(this.timUart_Tick);
             // 
             // rtCmd
@@ -325,17 +349,6 @@
             this.timTime.Enabled = true;
             this.timTime.Interval = 1000;
             this.timTime.Tick += new System.EventHandler(this.timTime_Tick);
-            // 
-            // btnOpenFile
-            // 
-            this.btnOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFile.Location = new System.Drawing.Point(3, 5);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(214, 58);
-            this.btnOpenFile.TabIndex = 0;
-            this.btnOpenFile.Text = "打开输出文件";
-            this.btnOpenFile.UseVisualStyleBackColor = true;
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // frmMain
             // 
@@ -396,6 +409,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuOutputCmd;
         private System.Windows.Forms.ToolStripMenuItem menuFontCmd;
         private System.Windows.Forms.Button btnOpenFile;
+        private System.Windows.Forms.Button btnDbg;
     }
 }
 
