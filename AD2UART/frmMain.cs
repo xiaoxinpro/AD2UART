@@ -20,6 +20,7 @@ namespace AD2UART
         public SerialPort sp1 = new SerialPort();
         public Queue DQueue = Queue.Synchronized(new Queue());
         public Thread thRecDataProcess;
+        public long StartTimeNum;
 
         public frmMain()
         {
@@ -277,17 +278,19 @@ namespace AD2UART
         {
             if (!sp1.IsOpen)
             {
+                StartTimeNum = Uart.GetTimeStamp();
+                dataCnt = 8; //复位数据起始指针
                 if (Profile.G_AD_OUTAD == "TRUE" && Profile.G_AD_OUTVOL == "TRUE")
                 {
-                    funcOutFile("\r\nAD1\t电压1\tAD2\t电压2\tAD3\t电压3\tAD4\t电压4\t\r\n");
+                    funcOutFile("\r\n时间(毫秒)\tAD1\t电压1\tAD2\t电压2\tAD3\t电压3\tAD4\t电压4\t");
                 }
                 else if (Profile.G_AD_OUTAD == "FALSE" && Profile.G_AD_OUTVOL == "TRUE")
                 {
-                    funcOutFile("\r\n电压1\t电压2\t电压3\t电压4\t\r\n");
+                    funcOutFile("\r\n时间(毫秒)\t电压1\t电压2\t电压3\t电压4\t");
                 }
                 else if (Profile.G_AD_OUTAD == "TRUE" && Profile.G_AD_OUTVOL == "FALSE")
                 {
-                    funcOutFile("\r\nAD1\tAD2\tAD3\tAD4\t\r\n");
+                    funcOutFile("\r\n时间(毫秒)\tAD1\tAD2\tAD3\tAD4\t");
                 }
                 else
                 {
@@ -560,6 +563,10 @@ namespace AD2UART
                     }
                     else if(dataCnt % 2 == 1)
                     {
+                        if(dataCnt == 1)
+                        {
+                            strData.Append((Uart.GetTimeStamp() - StartTimeNum) + "\t");
+                        }
                         dataH = byteBuff[i];
                         if(Profile.G_AD_OUTAD == "TRUE")
                         {
