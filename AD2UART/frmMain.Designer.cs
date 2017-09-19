@@ -85,7 +85,6 @@
             this.btnDbg.TabIndex = 1;
             this.btnDbg.Text = "开启调试";
             this.btnDbg.UseVisualStyleBackColor = true;
-            this.btnDbg.Visible = false;
             this.btnDbg.Click += new System.EventHandler(this.btnDbg_Click);
             // 
             // btnOpenFile

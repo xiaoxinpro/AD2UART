@@ -18,6 +18,7 @@ namespace INIFILE
             G_PARITY = _file.ReadString("CONFIG", "Parity", "NONE");
             G_DATA_SENDSTR = _file.ReadString("CONFIG", "DataSendStr", "FALSE");
             G_DATA_RCVSTR = _file.ReadString("CONFIG", "DataRcvStr", "FALSE");
+            G_AD_TYPE = _file.ReadString("AD", "OutType", "AUTO");
             G_AD_PATH = _file.ReadString("AD", "OutPath", "NONE");
             G_AD_OUTAD = _file.ReadString("AD", "OutAD", "TRUE");
             G_AD_OUTVOL = _file.ReadString("AD", "OutVol", "TRUE");
@@ -40,6 +41,7 @@ namespace INIFILE
             _file.WriteString("CONFIG", "Parity", G_PARITY);
             _file.WriteString("CONFIG", "DataSendStr", G_DATA_SENDSTR);
             _file.WriteString("CONFIG", "DataRcvStr", G_DATA_RCVSTR);
+            _file.WriteString("AD", "OutType", G_AD_TYPE);
             _file.WriteString("AD", "OutPath", G_AD_PATH);
             _file.WriteString("AD", "OutAD", G_AD_OUTAD);
             _file.WriteString("AD", "OutVol", G_AD_OUTVOL);
@@ -126,6 +128,7 @@ namespace INIFILE
         public static string G_DATA_SENDSTR = "FALSE";
         public static string G_DATA_RCVSTR = "FALSE";
 
+        public static string G_AD_TYPE = "AUTO";
         public static string G_AD_PATH = "";
         public static string G_AD_OUTAD = "TRUE";
         public static string G_AD_OUTVOL = "TRUE";
@@ -136,6 +139,8 @@ namespace INIFILE
         public static double[] arrADVoltage;
         public static double[] arrADGain;
         public static double[] arrADDataBit;
+
+        public static int fileNum;
 
     }
 }

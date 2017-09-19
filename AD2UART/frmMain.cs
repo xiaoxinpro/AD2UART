@@ -274,28 +274,33 @@ namespace AD2UART
             }
         }
 
+        public void funcInitOutFile()
+        {
+            if (Profile.G_AD_OUTAD == "TRUE" && Profile.G_AD_OUTVOL == "TRUE")
+            {
+                funcOutFile("\r\n时间(毫秒)\tAD1\t电压1\tAD2\t电压2\tAD3\t电压3\tAD4\t电压4\t");
+            }
+            else if (Profile.G_AD_OUTAD == "FALSE" && Profile.G_AD_OUTVOL == "TRUE")
+            {
+                funcOutFile("\r\n时间(毫秒)\t电压1\t电压2\t电压3\t电压4\t");
+            }
+            else if (Profile.G_AD_OUTAD == "TRUE" && Profile.G_AD_OUTVOL == "FALSE")
+            {
+                funcOutFile("\r\n时间(毫秒)\tAD1\tAD2\tAD3\tAD4\t");
+            }
+            else
+            {
+                funcOutFile("\r\n无输出\r\n");
+            }
+        }
+
         public void funcOpenSerialPort()
         {
             if (!sp1.IsOpen)
             {
                 StartTimeNum = Uart.GetTimeStamp();
                 dataCnt = 8; //复位数据起始指针
-                if (Profile.G_AD_OUTAD == "TRUE" && Profile.G_AD_OUTVOL == "TRUE")
-                {
-                    funcOutFile("\r\n时间(毫秒)\tAD1\t电压1\tAD2\t电压2\tAD3\t电压3\tAD4\t电压4\t");
-                }
-                else if (Profile.G_AD_OUTAD == "FALSE" && Profile.G_AD_OUTVOL == "TRUE")
-                {
-                    funcOutFile("\r\n时间(毫秒)\t电压1\t电压2\t电压3\t电压4\t");
-                }
-                else if (Profile.G_AD_OUTAD == "TRUE" && Profile.G_AD_OUTVOL == "FALSE")
-                {
-                    funcOutFile("\r\n时间(毫秒)\tAD1\tAD2\tAD3\tAD4\t");
-                }
-                else
-                {
-                    funcOutFile("\r\n无输出\r\n");
-                }
+                funcInitOutFile();
 
                 try
                 {
@@ -483,6 +488,8 @@ namespace AD2UART
 
         }
 
+        private int loopCnt = 0;
+        private bool isLoopMode = false;
         private void ThreadRecDataProcess()
         {
             while (true)
@@ -491,7 +498,7 @@ namespace AD2UART
                 try
                 {
                     if(buff.Length > 0)
-                    {
+                    {                        
                         for (int i = 0; i < buff.Length; i++)
                         {
                             buff[i] = (byte)DQueue.Dequeue();
@@ -499,6 +506,7 @@ namespace AD2UART
                     }
                     else
                     {
+                        loopCnt++;
                         System.Threading.Thread.Sleep(1);
                         continue;
                     }
@@ -547,7 +555,6 @@ namespace AD2UART
                         {
                             dataCnt = 8;
                         }
-                        continue;
                     }
                     else if (dataCnt == 9)
                     {
@@ -559,7 +566,6 @@ namespace AD2UART
                         {
                             dataCnt = 8;
                         }
-                        continue;
                     }
                     else if(dataCnt % 2 == 1)
                     {
@@ -593,6 +599,24 @@ namespace AD2UART
                             strData.Append(vol + "\t");
                         }
                     }
+
+                    if(dataCnt == 0)
+                    {
+                        //Console.WriteLine("当前循环次数："+ loopCnt);
+                        if ((Profile.G_AD_TYPE == "AUTO") && (((loopCnt > 15) && !isLoopMode) || ((loopCnt < 15) && isLoopMode)))
+                        {
+                            //输出最后一帧数据
+                            funcOutFile(strData.ToString());
+                            strData = new StringBuilder();
+
+                            //创建新文件并输出文件头
+                            isLoopMode = !isLoopMode;
+                            Profile.fileNum++;
+                            funcInitOutFile();
+                            Console.WriteLine(timUart.Interval + "循环次数" + loopCnt);
+                        }
+                        loopCnt = 0;
+                    }
                 }
                 funcOutFile(strData.ToString());
                 //Console.Write(strData.ToString());
@@ -601,10 +625,16 @@ namespace AD2UART
 
         private void funcOutFile(string buff)
         {
+            string strPath = Profile.G_AD_PATH;
+            if(Profile.G_AD_TYPE == "AUTO")
+            {
+                strPath += @"\" + Profile.fileNum + ".xls";
+            }
+            //Console.WriteLine("输出路径：" + strPath);
             try
             {
                 //StreamWriter swOutputCmd = File.AppendText(Profile.G_AD_PATH);
-                using (StreamWriter swOutputCmd = new StreamWriter(Profile.G_AD_PATH, true, Encoding.GetEncoding("gb2312")))
+                using (StreamWriter swOutputCmd = new StreamWriter(strPath, true, Encoding.GetEncoding("gb2312")))
                 {
                     swOutputCmd.Write(buff);
                     swOutputCmd.Flush();
@@ -734,11 +764,14 @@ namespace AD2UART
             System.Diagnostics.Process.Start(Profile.G_AD_PATH);
         }
 
+        bool isDbgLoopTime = false;
         private void btnDbg_Click(object sender, EventArgs e)
         {
-            if(btnDbg.Text == "开启调试")
+            if (btnDbg.Text == "开启调试")
             {
                 btnDbg.Text = "关闭调试";
+                isDbgLoopTime = !isDbgLoopTime;
+                timUart.Interval = isDbgLoopTime ? 30 : 5;
                 timUart.Enabled = true;
             }
             else
@@ -747,5 +780,6 @@ namespace AD2UART
                 timUart.Enabled = false;
             }
         }
+
     }
 }
