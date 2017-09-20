@@ -38,6 +38,12 @@ namespace AD2UART
 
             //设置富文本高度
             rtCmd.Height = statusMain.Top - rtCmd.Top - 10;
+
+            //检测图表文件是否存在
+            if(!File.Exists(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "chart.html"))
+            {
+                btnChart.Enabled = false;
+            }
         }
 
         private void frmMain_Shown(object sender, EventArgs e)

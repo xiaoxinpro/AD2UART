@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDbg = new System.Windows.Forms.Button();
+            this.btnChart = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
             this.menuMain = new System.Windows.Forms.MenuStrip();
@@ -59,7 +60,6 @@
             this.timUart = new System.Windows.Forms.Timer(this.components);
             this.rtCmd = new System.Windows.Forms.RichTextBox();
             this.timTime = new System.Windows.Forms.Timer(this.components);
-            this.btnChart = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.statusMain.SuspendLayout();
@@ -87,14 +87,25 @@
             this.btnDbg.TabIndex = 1;
             this.btnDbg.Text = "开启调试";
             this.btnDbg.UseVisualStyleBackColor = true;
+            this.btnDbg.Visible = false;
             this.btnDbg.Click += new System.EventHandler(this.btnDbg_Click);
+            // 
+            // btnChart
+            // 
+            this.btnChart.Location = new System.Drawing.Point(223, 5);
+            this.btnChart.Name = "btnChart";
+            this.btnChart.Size = new System.Drawing.Size(214, 58);
+            this.btnChart.TabIndex = 1;
+            this.btnChart.Text = "导出图表";
+            this.btnChart.UseVisualStyleBackColor = true;
+            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
             // btnOpenFile
             // 
             this.btnOpenFile.Location = new System.Drawing.Point(3, 5);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(214, 58);
-            this.btnOpenFile.TabIndex = 0;
+            this.btnOpenFile.TabIndex = 1;
             this.btnOpenFile.Text = "打开输出文件";
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
@@ -341,7 +352,7 @@
             this.rtCmd.Name = "rtCmd";
             this.rtCmd.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.rtCmd.Size = new System.Drawing.Size(1030, 593);
-            this.rtCmd.TabIndex = 4;
+            this.rtCmd.TabIndex = 0;
             this.rtCmd.Text = "";
             this.rtCmd.TextChanged += new System.EventHandler(this.rtCmd_TextChanged);
             // 
@@ -350,16 +361,6 @@
             this.timTime.Enabled = true;
             this.timTime.Interval = 1000;
             this.timTime.Tick += new System.EventHandler(this.timTime_Tick);
-            // 
-            // btnChart
-            // 
-            this.btnChart.Location = new System.Drawing.Point(223, 5);
-            this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(214, 58);
-            this.btnChart.TabIndex = 0;
-            this.btnChart.Text = "导出图表";
-            this.btnChart.UseVisualStyleBackColor = true;
-            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
             // frmMain
             // 
