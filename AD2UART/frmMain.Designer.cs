@@ -59,6 +59,7 @@
             this.timUart = new System.Windows.Forms.Timer(this.components);
             this.rtCmd = new System.Windows.Forms.RichTextBox();
             this.timTime = new System.Windows.Forms.Timer(this.components);
+            this.btnChart = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.statusMain.SuspendLayout();
@@ -69,6 +70,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.btnDbg);
+            this.panel1.Controls.Add(this.btnChart);
             this.panel1.Controls.Add(this.btnOpenFile);
             this.panel1.Controls.Add(this.btnEnd);
             this.panel1.Location = new System.Drawing.Point(12, 59);
@@ -349,6 +351,16 @@
             this.timTime.Interval = 1000;
             this.timTime.Tick += new System.EventHandler(this.timTime_Tick);
             // 
+            // btnChart
+            // 
+            this.btnChart.Location = new System.Drawing.Point(223, 5);
+            this.btnChart.Name = "btnChart";
+            this.btnChart.Size = new System.Drawing.Size(214, 58);
+            this.btnChart.TabIndex = 0;
+            this.btnChart.Text = "导出图表";
+            this.btnChart.UseVisualStyleBackColor = true;
+            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -409,6 +421,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuFontCmd;
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.Button btnDbg;
+        private System.Windows.Forms.Button btnChart;
     }
 }
 

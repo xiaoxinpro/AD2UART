@@ -65,9 +65,6 @@
             this.tabAD3 = new System.Windows.Forms.TabPage();
             this.tabAD4 = new System.Windows.Forms.TabPage();
             this.pBottom = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.rbOutOne = new System.Windows.Forms.RadioButton();
-            this.rbOutAuto = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -231,20 +228,17 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.rbOutAuto);
-            this.groupBox2.Controls.Add(this.rbOutOne);
             this.groupBox2.Controls.Add(this.cbVoltageValue);
             this.groupBox2.Controls.Add(this.cbADValue);
             this.groupBox2.Controls.Add(this.btnSelectPath);
             this.groupBox2.Controls.Add(this.txtOutPath);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.groupBox2.Location = new System.Drawing.Point(17, 288);
+            this.groupBox2.Location = new System.Drawing.Point(13, 288);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(576, 279);
+            this.groupBox2.Size = new System.Drawing.Size(576, 199);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "输出配置";
@@ -255,7 +249,7 @@
             this.cbVoltageValue.Checked = true;
             this.cbVoltageValue.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbVoltageValue.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.cbVoltageValue.Location = new System.Drawing.Point(307, 210);
+            this.cbVoltageValue.Location = new System.Drawing.Point(305, 136);
             this.cbVoltageValue.Name = "cbVoltageValue";
             this.cbVoltageValue.Size = new System.Drawing.Size(128, 39);
             this.cbVoltageValue.TabIndex = 11;
@@ -268,7 +262,7 @@
             this.cbADValue.Checked = true;
             this.cbADValue.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbADValue.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.cbADValue.Location = new System.Drawing.Point(174, 210);
+            this.cbADValue.Location = new System.Drawing.Point(170, 136);
             this.cbADValue.Name = "cbADValue";
             this.cbADValue.Size = new System.Drawing.Size(114, 39);
             this.cbADValue.TabIndex = 11;
@@ -278,7 +272,7 @@
             // btnSelectPath
             // 
             this.btnSelectPath.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.btnSelectPath.Location = new System.Drawing.Point(469, 134);
+            this.btnSelectPath.Location = new System.Drawing.Point(465, 63);
             this.btnSelectPath.Name = "btnSelectPath";
             this.btnSelectPath.Size = new System.Drawing.Size(92, 52);
             this.btnSelectPath.TabIndex = 4;
@@ -289,7 +283,7 @@
             // txtOutPath
             // 
             this.txtOutPath.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.txtOutPath.Location = new System.Drawing.Point(174, 138);
+            this.txtOutPath.Location = new System.Drawing.Point(170, 67);
             this.txtOutPath.Name = "txtOutPath";
             this.txtOutPath.Size = new System.Drawing.Size(288, 39);
             this.txtOutPath.TabIndex = 3;
@@ -297,7 +291,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 209);
+            this.label7.Location = new System.Drawing.Point(12, 135);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(167, 39);
@@ -307,7 +301,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 138);
+            this.label6.Location = new System.Drawing.Point(12, 67);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(167, 39);
@@ -394,7 +388,7 @@
             // btnEnd
             // 
             this.btnEnd.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnEnd.Location = new System.Drawing.Point(441, 875);
+            this.btnEnd.Location = new System.Drawing.Point(437, 792);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(152, 69);
             this.btnEnd.TabIndex = 2;
@@ -406,7 +400,7 @@
             // 
             this.btnOK.Enabled = false;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnOK.Location = new System.Drawing.Point(264, 875);
+            this.btnOK.Location = new System.Drawing.Point(260, 792);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(152, 69);
             this.btnOK.TabIndex = 2;
@@ -431,7 +425,7 @@
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.groupBox3.Location = new System.Drawing.Point(17, 580);
+            this.groupBox3.Location = new System.Drawing.Point(13, 500);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(576, 276);
             this.groupBox3.TabIndex = 3;
@@ -492,48 +486,16 @@
             // 
             // pBottom
             // 
-            this.pBottom.Location = new System.Drawing.Point(21, 968);
+            this.pBottom.Location = new System.Drawing.Point(17, 885);
             this.pBottom.Name = "pBottom";
             this.pBottom.Size = new System.Drawing.Size(572, 50);
             this.pBottom.TabIndex = 4;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 67);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(167, 39);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "输出类型：";
-            // 
-            // rbOutOne
-            // 
-            this.rbOutOne.AutoSize = true;
-            this.rbOutOne.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.rbOutOne.Location = new System.Drawing.Point(174, 67);
-            this.rbOutOne.Name = "rbOutOne";
-            this.rbOutOne.Size = new System.Drawing.Size(150, 39);
-            this.rbOutOne.TabIndex = 12;
-            this.rbOutOne.Text = "单一文件";
-            this.rbOutOne.UseVisualStyleBackColor = true;
-            // 
-            // rbOutAuto
-            // 
-            this.rbOutAuto.AutoSize = true;
-            this.rbOutAuto.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.rbOutAuto.Location = new System.Drawing.Point(330, 67);
-            this.rbOutAuto.Name = "rbOutAuto";
-            this.rbOutAuto.Size = new System.Drawing.Size(202, 39);
-            this.rbOutAuto.TabIndex = 12;
-            this.rbOutAuto.Text = "自动分割文件";
-            this.rbOutAuto.UseVisualStyleBackColor = true;
             // 
             // frmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(605, 952);
+            this.ClientSize = new System.Drawing.Size(605, 879);
             this.Controls.Add(this.pBottom);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnOK);
@@ -599,8 +561,5 @@
         private System.Windows.Forms.TabPage tabAD3;
         private System.Windows.Forms.TabPage tabAD4;
         private System.Windows.Forms.Panel pBottom;
-        private System.Windows.Forms.RadioButton rbOutAuto;
-        private System.Windows.Forms.RadioButton rbOutOne;
-        private System.Windows.Forms.Label label11;
     }
 }
