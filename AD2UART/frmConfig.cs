@@ -130,20 +130,6 @@ namespace AD2UART
                     }
             }
 
-            //预置输出类型
-            switch (Profile.G_AD_TYPE)
-            {
-                case "AUTO":
-                    rbOutAuto.Checked = true;
-                    break;
-                case "ONE":
-                    rbOutOne.Checked = true;
-                    break;
-                default:
-                    MessageBox.Show("预置是否输出类型参数错误。");
-                    return;
-            }
-
             //预置输出路径
             txtOutPath.Text = (Profile.G_AD_PATH == "NONE") ? "" : Profile.G_AD_PATH;
 
@@ -206,7 +192,7 @@ namespace AD2UART
         private void btnOK_Click(object sender, EventArgs e)
         {
             SaveSerialData();
-            if ((rbOutOne.Checked && !File.Exists(Profile.G_AD_PATH)) || (rbOutAuto.Checked && !Directory.Exists(Profile.G_AD_PATH))) 
+            if (!File.Exists(Profile.G_AD_PATH))
             {
                 MessageBox.Show("请先选择输出路径。", "路径不存在", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 btnSelectPath_Click(null, null);
@@ -347,8 +333,6 @@ namespace AD2UART
                     break;
             }
 
-            Profile.G_AD_TYPE = rbOutAuto.Checked ? "AUTO" : "ONE";
-
             Profile.G_AD_PATH = (txtOutPath.Text == "") ? "NONE" : txtOutPath.Text;
 
             Profile.G_AD_OUTAD = cbADValue.Checked ? "TRUE" : "FALSE";
@@ -368,74 +352,32 @@ namespace AD2UART
             cbStop.SelectedIndex = 0;
             cbADValue.Checked = true;
             cbVoltageValue.Checked = true;
-            rbOutOne.Checked = true;
         }
 
         private void btnSelectPath_Click(object sender, EventArgs e)
         {
-            string str;
-            if (rbOutAuto.Checked)
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "表格格式|*.xls|文本格式|*.txt|所有格式|*.*";
+            save.RestoreDirectory = true;
+            save.FilterIndex = 1;
+            if (save.ShowDialog() == DialogResult.OK)
             {
-                FolderBrowserDialog save = new FolderBrowserDialog();
-                save.Description = "输出目录";
-                if(save.ShowDialog() == DialogResult.OK)
+                string str = save.FileName;
+                try
                 {
-                    if (string.IsNullOrEmpty(save.SelectedPath))
+                    using (StreamWriter sw = new StreamWriter(str, false, Encoding.GetEncoding("gb2312")))
                     {
-                        txtOutPath.Text = "";
-                        return;
-                    }
-                    txtOutPath.Text = save.SelectedPath;
-                    Profile.fileNum = 0;
-                    str = save.SelectedPath + @"\" + Profile.fileNum + ".xls";
-                    while(File.Exists(str))
-                    {
-                        FileInfo fileInfo = new FileInfo(str);
-                        Console.WriteLine("文件" + str + "的大小：" + fileInfo.Length);
-                        if(fileInfo.Length == 0)
-                        {
-                            break;
-                        }
-                        Profile.fileNum++;
-                        str = save.SelectedPath + @"\" + Profile.fileNum + ".xls";
+                        sw.Write("");
+                        sw.Flush();
+                        sw.Close();
                     }
                 }
-                else
+                catch (Exception)
                 {
+                    MessageBox.Show("文件保存失败，请重新选择。");
                     return;
                 }
-            }
-            else
-            {
-                SaveFileDialog save = new SaveFileDialog();
-                save.Title = "输出路径";
-                save.Filter = "表格格式|*.xls|文本格式|*.txt|所有格式|*.*";
-                save.RestoreDirectory = true;
-                save.FilterIndex = 1;
-                if (save.ShowDialog() == DialogResult.OK)
-                {
-                    str = save.FileName;
-                    txtOutPath.Text = str;
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(str, false, Encoding.GetEncoding("gb2312")))
-                {
-                    sw.Write("");
-                    sw.Flush();
-                    sw.Close();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("文件保存失败，请重新选择。");
-                return;
+                txtOutPath.Text = str;
             }
         }
 
