@@ -1,25 +1,23 @@
-﻿// var base = +new Date(1968, 9, 3);
-// var oneDay = 24 * 3600 * 1000;
-// var date = [];
-
-// var data1 = [Math.random() * 300];
-// var data2 = [0];
-// var data3 = [0];
-// var data4 = [0];
-
-
-// for (var i = 1; i < 20000; i++) {
-//     var now = new Date(base += oneDay);
-//     date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-//     data1.push(Math.round((Math.random() - 0.5) * 20 + data1[i - 1]));
-//     data2.push(i % 200);
-// }
-
-option = {
+﻿var option = {
     tooltip: {
         trigger: 'axis',
         position: function (pt) {
             return [pt[0], '10%'];
+        },
+        formatter:function(params){
+            var html = '';
+            if(params.length>0){
+                Xindex = params[0].dataIndex;
+                Xname = params[0].name;
+                Xvalue = params[0].value;
+                html+='<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#FFF;"></span>'
+                html+='时间：'+params[0].name+'ms<br>';
+                for ( var int = 0; int < params.length; int++) {
+                    html+='<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:'+params[int].color+';"></span>'
+                    html+=params[int].seriesName+'：'+params[int].data+'V<br>';
+                }
+            }
+            return html;
         }
     },
     title: {

@@ -10,8 +10,12 @@
     <script src="chart.js"></script>
 </head>
 <body>
+    <div style="position: absolute; ">
+        <p>电压(V) ：<span id="vol1"></span> - <span id="vol2"></span> = <span id="vol"></span></p>
+        <p>时间(ms)：<span id="time1"></span> - <span id="time2"></span> = <span id="time"></span></p>
+    </div>
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-    <div id="main" style="position: absolute;width: 100%;top: 50px;bottom: 50px;background-color: azure;height: auto;"></div>
+    <div id="main" style="position: absolute;width: 100%;top: 100px;bottom: 20px;background-color: azure;height: auto;"  onmousedown = "mousedown()"></div>
 </body>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
@@ -19,5 +23,38 @@
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+
+    var numClickCnt = 0;
+    var vol1,vol2,time1,time2;
+    function mousedown(){
+        console.log(Xindex,Xname,Xvalue);
+        switch(++numClickCnt){
+            case 1:
+                vol1 = Xvalue;
+                time1 = parseInt(Xname);
+                vol2 = " ";
+                time2 = " ";
+                vol = " ";
+                time = " ";
+                break;
+            case 2:
+                vol2 = Xvalue;
+                time2 = parseInt(Xname);
+                vol = vol1 - vol2;
+                time = time1 - time2;
+                numClickCnt = 0;
+                break;
+            default:
+                numClickCnt = 0;
+                break;
+        }
+        document.getElementById('vol1').innerHTML = vol1;
+        document.getElementById('vol2').innerHTML = vol2;
+        document.getElementById('vol').innerHTML = vol;
+        document.getElementById('time1').innerHTML = time1;
+        document.getElementById('time2').innerHTML = time2;
+        document.getElementById('time').innerHTML = time;
+    }
+
 </script>
 </html>
