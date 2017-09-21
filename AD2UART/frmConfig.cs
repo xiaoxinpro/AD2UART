@@ -443,5 +443,17 @@ namespace AD2UART
         {
             Profile.arrADDataBit[tcAD.SelectedIndex] = Convert.ToDouble(cbADDataBit.Text);
         }
+
+        private void btnXls2Chart_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.Title = "选择数据文件";
+            of.Filter = "表格格式|*.xls|文本格式|*.txt|所有格式|*.*";
+            if (of.ShowDialog() == DialogResult.OK)
+            {
+                frmMain frmChart = new frmMain("chart", of.FileName);
+                frmChart.ShowDialog();
+            }
+        }
     }
 }

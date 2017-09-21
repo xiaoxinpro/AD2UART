@@ -65,6 +65,7 @@
             this.tabAD3 = new System.Windows.Forms.TabPage();
             this.tabAD4 = new System.Windows.Forms.TabPage();
             this.pBottom = new System.Windows.Forms.Panel();
+            this.btnXls2Chart = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -491,11 +492,23 @@
             this.pBottom.Size = new System.Drawing.Size(572, 50);
             this.pBottom.TabIndex = 4;
             // 
+            // btnXls2Chart
+            // 
+            this.btnXls2Chart.Font = new System.Drawing.Font("宋体", 8F);
+            this.btnXls2Chart.Location = new System.Drawing.Point(17, 792);
+            this.btnXls2Chart.Name = "btnXls2Chart";
+            this.btnXls2Chart.Size = new System.Drawing.Size(130, 69);
+            this.btnXls2Chart.TabIndex = 5;
+            this.btnXls2Chart.Text = "选择表格转为图表";
+            this.btnXls2Chart.UseVisualStyleBackColor = true;
+            this.btnXls2Chart.Click += new System.EventHandler(this.btnXls2Chart_Click);
+            // 
             // frmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(605, 879);
+            this.ClientSize = new System.Drawing.Size(605, 895);
+            this.Controls.Add(this.btnXls2Chart);
             this.Controls.Add(this.pBottom);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnOK);
@@ -561,5 +574,6 @@
         private System.Windows.Forms.TabPage tabAD3;
         private System.Windows.Forms.TabPage tabAD4;
         private System.Windows.Forms.Panel pBottom;
+        private System.Windows.Forms.Button btnXls2Chart;
     }
 }

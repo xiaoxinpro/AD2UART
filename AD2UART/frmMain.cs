@@ -23,10 +23,26 @@ namespace AD2UART
         public long StartTimeNum;
         public static System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
 
+        public bool isFormTool = false;
         public frmMain()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
+            isFormTool = false;
+        }
+
+        public frmMain(string cmd, string text)
+        {
+            InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
+            isFormTool = true;
+            if (cmd == "chart")
+            {
+                if (funcXlsToJs(text))
+                {
+                    System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "chart.html");
+                }
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -77,6 +93,11 @@ namespace AD2UART
 
             rtCmd.Clear();
             funcOutputLog("准备就绪，等待串口开启。");
+
+            if (isFormTool)
+            {
+                return;
+            }
 
             //打开串口
             funcOpenSerialPort();
@@ -746,7 +767,7 @@ namespace AD2UART
             watch.Start();
             if (funcXlsToJs(Profile.G_AD_PATH))
             {
-                System.Diagnostics.Process.Start("explorer.exe", System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "chart.html");
+                System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "chart.html");
             }
             watch.Stop();
             Console.WriteLine("输出图表耗时：" + watch.Elapsed);
