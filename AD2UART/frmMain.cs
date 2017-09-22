@@ -40,7 +40,8 @@ namespace AD2UART
             {
                 if (funcXlsToJs(text))
                 {
-                    System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "chart.html");
+                    string strPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "chart.html";
+                    System.Diagnostics.Process.Start(strPath);
                 }
             }
         }
@@ -788,10 +789,11 @@ namespace AD2UART
             }
             try
             {
+                string strDirectory = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
                 StreamReader sr = new StreamReader(xlsPath, Encoding.GetEncoding("gb2312"));
-                StreamWriter sw0 = new StreamWriter(@"./ChartAD0.js", false, Encoding.GetEncoding("gb2312"));
-                StreamWriter sw1 = new StreamWriter(@"./ChartAD1.js", false, Encoding.GetEncoding("gb2312"));
-                StreamWriter sw2 = new StreamWriter(@"./ChartAD2.js", false, Encoding.GetEncoding("gb2312"));
+                StreamWriter sw0 = new StreamWriter(strDirectory + "ChartAD0.js", false, Encoding.GetEncoding("gb2312"));
+                StreamWriter sw1 = new StreamWriter(strDirectory + "ChartAD1.js", false, Encoding.GetEncoding("gb2312"));
+                StreamWriter sw2 = new StreamWriter(strDirectory + "ChartAD2.js", false, Encoding.GetEncoding("gb2312"));
                 int i = 0;
                 string line;
                 sw0.Write("var data0 = new Array(0");
