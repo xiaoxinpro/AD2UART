@@ -123,9 +123,10 @@ namespace AD2UART
 
         }
 
+        frmAbout FormAbout = new frmAbout();
         private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormAbout.Show();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
